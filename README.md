@@ -3,32 +3,6 @@
 Securelytix is a full-stack application featuring authentication, client and employee management, built with React.js for the frontend and Node.js + Express for the backend.
 
 ---
-
-## 📂 Project Structure
-
-```
-securelytix/
-├── backend/                # Node.js + Express backend
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── config/
-│   ├── middleware/
-│   ├── .env
-│   └── server.js
-│
-├── frontend/               # React frontend with Tailwind CSS
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── App.js
-│   │   └── index.js
-│   ├── public/
-│   └── .env
-│
-└── README.md
-```
-
 ---
 
 ## 🚀 Technologies Used
@@ -69,7 +43,7 @@ REACT_APP_BASE_URL=http://localhost:5000
 
 > Change this to your backend deployed URL in production.
 
-### 3. Run the frontend
+### 3. Run the client
 
 ```bash
 npm start
@@ -80,12 +54,12 @@ npm start
 | Path         | Description                  |
 |--------------|------------------------------|
 | `/signup`    | Signup page                  |
-| `/login`     | Login page                   |
+| `/`     | Login page                   |
 | `/dashboard` | Dashboard with user data     |
 
 ---
 
-## 🧠 Backend Setup (`/backend`)
+## 🧠 Backend Setup (`/server`)
 
 ### 1. Install dependencies
 
@@ -96,7 +70,7 @@ npm install
 
 ### 2. Environment Variables
 
-Create a `.env` file in `/backend`:
+Create a `.env` file in `/server`:
 
 ```
 PORT=5000
@@ -151,7 +125,7 @@ This uses `nodemon` for hot reloading.
 
 ## ✍️ Author
 
-Made with ❤️ by [Your Name]
+Made with ❤️ by Rahul
 
 ---
 
