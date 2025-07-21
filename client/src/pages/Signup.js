@@ -21,16 +21,21 @@ const Signup = () => {
     onSubmit: async (values) => {
       try {
         setIsSubmitting(true);
-        const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/signup`, {
-          email: values.email,
-          password: values.password,
-        });
+        const res = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/api/signup`,
+          {
+            email: values.email,
+            password: values.password,
+          }
+        );
 
         if (res.data.success) {
           setSignupError("");
           navigate("/");
         } else {
-          setSignupError(res.data.message || "User already exists or server error");
+          setSignupError(
+            res.data.message || "User already exists or server error"
+          );
         }
       } catch (err) {
         setSignupError("User already exists or server error");
@@ -41,27 +46,33 @@ const Signup = () => {
   });
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 px-4 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 px-4 sm:px-6 lg:px-8">
       <form
         onSubmit={formik.handleSubmit}
-        className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-md space-y-6"
+        className="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl w-full max-w-md space-y-6"
         noValidate
         aria-labelledby="signup-title"
       >
-        <h2 id="signup-title" className="text-2xl sm:text-3xl font-extrabold text-center text-blue-900">
+        <h2
+          id="signup-title"
+          className="text-2xl sm:text-3xl font-extrabold text-center text-white"
+        >
           Securelytix Signup
         </h2>
 
         {/* Error Message */}
         {signupError && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg text-sm text-center">
+          <div className="bg-red-600/20 border border-red-500 text-red-400 px-4 py-3 rounded-lg text-sm text-center">
             {signupError}
           </div>
         )}
 
         {/* Email Field */}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-300"
+          >
             Email
           </label>
           <input
@@ -71,11 +82,10 @@ const Signup = () => {
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
-            
+            className="mt-1 w-full border border-gray-600 bg-gray-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {formik.touched.email && formik.errors.email && (
-            <p id="email-error" className="text-red-500 text-sm mt-1">
+            <p id="email-error" className="text-red-400 text-sm mt-1">
               {formik.errors.email}
             </p>
           )}
@@ -83,23 +93,25 @@ const Signup = () => {
 
         {/* Password Field */}
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium text-gray-300"
+          >
             Password
           </label>
           <div className="relative">
             <input
               id="password"
               type={showPassword ? "text" : "password"}
-              name="password" 
+              name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 pr-12"
-             
+              className="mt-1 w-full border border-gray-600 bg-gray-700 text-white rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               type="button"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-600 hover:text-blue-800 text-sm font-medium transition"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-400 hover:text-blue-300 text-sm font-medium transition"
               onClick={() => setShowPassword((prev) => !prev)}
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
@@ -107,7 +119,7 @@ const Signup = () => {
             </button>
           </div>
           {formik.touched.password && formik.errors.password && (
-            <p id="password-error" className="text-red-500 text-sm mt-1">
+            <p id="password-error" className="text-red-400 text-sm mt-1">
               {formik.errors.password}
             </p>
           )}
@@ -115,7 +127,10 @@ const Signup = () => {
 
         {/* Confirm Password Field */}
         <div>
-          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="confirmPassword"
+            className="block text-sm font-medium text-gray-300"
+          >
             Confirm Password
           </label>
           <div className="relative">
@@ -126,20 +141,19 @@ const Signup = () => {
               value={formik.values.confirmPassword}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 pr-12"
-              
+              className="mt-1 w-full border border-gray-600 bg-gray-700 text-white rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               type="button"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-600 hover:text-blue-800 text-sm font-medium transition"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-400 hover:text-blue-300 text-sm font-medium transition"
               onClick={() => setShowConfirmPassword((prev) => !prev)}
-              
+              aria-label={showConfirmPassword ? "Hide password" : "Show password"}
             >
               {showConfirmPassword ? "Hide" : "Show"}
             </button>
           </div>
           {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-            <p id="confirmPassword-error" className="text-red-500 text-sm mt-1">
+            <p id="confirmPassword-error" className="text-red-400 text-sm mt-1">
               {formik.errors.confirmPassword}
             </p>
           )}
@@ -183,11 +197,11 @@ const Signup = () => {
 
         {/* Login Link */}
         <div className="text-center">
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-gray-400">
             Already have an account?{" "}
             <button
               type="button"
-              className="text-blue-600 hover:underline font-medium"
+              className="text-blue-400 hover:underline font-medium"
               onClick={() => navigate("/")}
               aria-label="Go to login page"
             >

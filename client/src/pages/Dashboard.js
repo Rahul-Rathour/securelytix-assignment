@@ -30,126 +30,112 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 py-6 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-blue-900 mb-8 sm:mb-12 drop-shadow-sm">
-          Securelytix Dashboard
-        </h1>
+    <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-10 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+      <h1 className="text-3xl font-bold text-center mb-10">📊 Dashboard</h1>
 
-        {loading && (
-          <div className="flex justify-center items-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
-          </div>
-        )}
+      {error && (
+        <p className="text-red-400 text-center mb-4">{error}</p>
+      )}
 
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6 text-center">
-            {error}
-          </div>
-        )}
-
-        {!loading && !error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 items-start">
-            {/* Client Dropdown Section */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 min-h-[100px] flex flex-col">
-              <h2 className="text-xl sm:text-2xl font-semibold text-blue-800 mb-4">
-                Select a Client
-              </h2>
-              <select
-                className="w-full border border-blue-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
-                defaultValue=""
-                onChange={(e) => {
-                  const selectedId = parseInt(e.target.value);
-                  const client = clients.find((c) => c.id === selectedId);
-                  setSelectedClient(client);
-                }}
-                aria-label="Select a client"
-              >
-                <option value="" disabled>
-                  -- Choose a client --
+      {loading ? (
+        <p className="text-center text-gray-300">Loading data...</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-10">
+          {/* Client Card */}
+          <div className="bg-gray-800/80 border border-gray-700 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
+            <h2 className="text-xl sm:text-2xl font-semibold mb-4">
+              👤 Select a Client
+            </h2>
+            <select
+              className="w-full bg-gray-900 border border-gray-600 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+              defaultValue=""
+              onChange={(e) => {
+                const selectedId = parseInt(e.target.value);
+                const client = clients.find((c) => c.id === selectedId);
+                setSelectedClient(client);
+              }}
+              aria-label="Select a client"
+            >
+              <option value="" disabled>
+                -- Choose a client --
+              </option>
+              {clients.map((client) => (
+                <option key={client.id} value={client.id}>
+                  {client.name}
                 </option>
-                {clients.map((client) => (
-                  <option key={client.id} value={client.id}>
-                    {client.name}
-                  </option>
-                ))}
-              </select>
+              ))}
+            </select>
 
-              {selectedClient && (
-                <div className="mt-6 bg-blue-50 rounded-lg p-5 border border-blue-200 animate-fade-in flex-1">
-                  <h3 className="text-lg sm:text-xl font-medium text-blue-700 mb-3">
-                    Client Details
-                  </h3>
-                  <dl className="space-y-2">
-                    <div>
-                      <dt className="font-semibold text-gray-700 inline">Name:</dt>
-                      <dd className="inline ml-2">{selectedClient.name}</dd>
-                    </div>
-                    <div>
-                      <dt className="font-semibold text-gray-700 inline">Role:</dt>
-                      <dd className="inline ml-2">{selectedClient.role}</dd>
-                    </div>
-                    <div>
-                      <dt className="font-semibold text-gray-700 inline">Contact:</dt>
-                      <dd className="inline ml-2">{selectedClient.contact}</dd>
-                    </div>
-                  </dl>
-                </div>
-              )}
-            </div>
-
-            {/* Employee Dropdown Section */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 min-h-[100px] flex flex-col">
-              <h2 className="text-xl sm:text-2xl font-semibold text-blue-800 mb-4">
-                Select an Employee
-              </h2>
-              <select
-                className="w-full border border-blue-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
-                defaultValue=""
-                onChange={(e) => {
-                  const selectedId = parseInt(e.target.value);
-                  const employee = employees.find((emp) => emp.id === selectedId);
-                  setSelectedEmployee(employee);
-                }}
-                aria-label="Select an employee"
-              >
-                <option value="" disabled>
-                  -- Choose an employee --
-                </option>
-                {employees.map((emp) => (
-                  <option key={emp.id} value={emp.id}>
-                    {emp.name}
-                  </option>
-                ))}
-              </select>
-
-              {selectedEmployee && (
-                <div className="mt-6 bg-blue-50 rounded-lg p-5 border border-blue-200 animate-fade-in flex-1">
-                  <h3 className="text-lg sm:text-xl font-medium text-blue-700 mb-3">
-                    Employee Details
-                  </h3>
-                  <dl className="space-y-2">
-                    <div>
-                      <dt className="font-semibold text-gray-700 inline">Name:</dt>
-                      <dd className="inline ml-2">{selectedEmployee.name}</dd>
-                    </div>
-                    <div>
-                      <dt className="font-semibold text-gray-700 inline">Role:</dt>
-                      <dd className="inline ml-2">{selectedEmployee.role}</dd>
-                    </div>
-                    <div>
-                      <dt className="font-semibold text-gray-700 inline">Contact:</dt>
-                      <dd className="inline ml-2">{selectedEmployee.contact}</dd>
-                    </div>
-                  </dl>
-                </div>
-              )}
-            </div>
+            {selectedClient && (
+              <div className="mt-6 bg-gray-900 border border-gray-700 rounded-xl p-5 shadow-inner">
+                <h3 className="text-lg font-semibold mb-3">🗂️ Client Details</h3>
+                <dl className="space-y-2 text-sm sm:text-base">
+                  <div>
+                    <dt className="font-medium inline text-gray-300">Name:</dt>
+                    <dd className="inline ml-2 text-gray-100">{selectedClient.name}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-medium inline text-gray-300">Role:</dt>
+                    <dd className="inline ml-2 text-gray-100">{selectedClient.role}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-medium inline text-gray-300">Contact:</dt>
+                    <dd className="inline ml-2 text-gray-100">{selectedClient.contact}</dd>
+                  </div>
+                </dl>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+
+          {/* Employee Card */}
+          <div className="bg-gray-800/80 border border-gray-700 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
+            <h2 className="text-xl sm:text-2xl font-semibold mb-4">
+              👨‍💼 Select an Employee
+            </h2>
+            <select
+              className="w-full bg-gray-900 border border-gray-600 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+              defaultValue=""
+              onChange={(e) => {
+                const selectedId = parseInt(e.target.value);
+                const employee = employees.find((emp) => emp.id === selectedId);
+                setSelectedEmployee(employee);
+              }}
+              aria-label="Select an employee"
+            >
+              <option value="" disabled>
+                -- Choose an employee --
+              </option>
+              {employees.map((emp) => (
+                <option key={emp.id} value={emp.id}>
+                  {emp.name}
+                </option>
+              ))}
+            </select>
+
+            {selectedEmployee && (
+              <div className="mt-6 bg-gray-900 border border-gray-700 rounded-xl p-5 shadow-inner">
+                <h3 className="text-lg font-semibold mb-3">🧾 Employee Details</h3>
+                <dl className="space-y-2 text-sm sm:text-base">
+                  <div>
+                    <dt className="font-medium inline text-gray-300">Name:</dt>
+                    <dd className="inline ml-2 text-gray-100">{selectedEmployee.name}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-medium inline text-gray-300">Role:</dt>
+                    <dd className="inline ml-2 text-gray-100">{selectedEmployee.role}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-medium inline text-gray-300">Contact:</dt>
+                    <dd className="inline ml-2 text-gray-100">{selectedEmployee.contact}</dd>
+                  </div>
+                </dl>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
- 
+
 export default Dashboard;
